@@ -1,0 +1,6147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="PHOTO STUDIO — Luxury wedding photography and films for celebrations that become family heirlooms."
+  >
+
+  <title>PHOTO STUDIO — Atelier of Heirlooms</title>
+
+
+  <!-- ================= FONTS ================= -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- ================= LENIS ================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+
+  <style>
+
+    /* =========================================================
+       PHOTO STUDIO
+       ULTRA LUXURY WEDDING PHOTOGRAPHY
+       ========================================================= */
+
+
+    :root{
+
+      --black:#070708;
+      --cream:#FFFBF2;
+      --gold:#C9A86A;
+
+      --line-dark:rgba(255,251,242,.16);
+      --line-light:#E8E0D0;
+
+      --muted-dark:rgba(255,251,242,.62);
+      --muted-light:#70695f;
+
+      --serif:"Cormorant Garamond", Georgia, serif;
+      --sans:"Manrope", Arial, sans-serif;
+
+      --nav-height:82px;
+
+    }
+
+
+    /* ================= RESET ================= */
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+
+    html{
+      scroll-behavior:auto;
+      background:var(--black);
+    }
+
+
+    body{
+
+      background:var(--black);
+
+      color:var(--cream);
+
+      font-family:var(--sans);
+
+      font-weight:300;
+
+      overflow-x:hidden;
+
+      -webkit-font-smoothing:antialiased;
+
+    }
+
+
+    body.menu-open{
+      overflow:hidden;
+    }
+
+
+    img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
+
+
+    button{
+      border:0;
+      background:none;
+      color:inherit;
+      cursor:pointer;
+    }
+
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+
+    ::selection{
+      background:var(--gold);
+      color:var(--black);
+    }
+
+
+    /* ================= CUSTOM SCROLLBAR ================= */
+
+    ::-webkit-scrollbar{
+      width:5px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:var(--black);
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:var(--gold);
+    }
+
+
+    /* ================= GRAIN ================= */
+
+    body::before{
+
+      content:"";
+
+      position:fixed;
+
+      inset:0;
+
+      pointer-events:none;
+
+      z-index:9999;
+
+      opacity:.035;
+
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+
+      mix-blend-mode:soft-light;
+
+    }
+
+
+    /* ================= GLOBAL ================= */
+
+    .container{
+
+      width:min(1400px, calc(100% - 80px));
+
+      margin:auto;
+
+    }
+
+
+    .eyebrow{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:14px;
+
+      color:var(--gold);
+
+      font-size:9px;
+
+      font-weight:500;
+
+      letter-spacing:.28em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    .eyebrow::before{
+
+      content:"";
+
+      width:28px;
+
+      height:1px;
+
+      background:var(--gold);
+
+    }
+
+
+    .gold{
+      color:var(--gold);
+    }
+
+
+    .serif{
+      font-family:var(--serif);
+    }
+
+
+    /* ================= REVEAL ================= */
+
+    .reveal{
+
+      opacity:0;
+
+      transform:translateY(45px);
+
+      transition:
+        opacity 1.2s cubic-bezier(.22,1,.36,1),
+        transform 1.2s cubic-bezier(.22,1,.36,1);
+
+    }
+
+
+    .reveal.visible{
+
+      opacity:1;
+
+      transform:translateY(0);
+
+    }
+
+
+    /* =========================================================
+       NAVBAR
+       ========================================================= */
+
+    .navbar{
+
+      position:fixed;
+
+      top:0;
+      left:0;
+      right:0;
+
+      height:var(--nav-height);
+
+      z-index:500;
+
+      display:grid;
+
+      grid-template-columns:1fr auto 1fr;
+
+      align-items:center;
+
+      padding:0 42px;
+
+      border-bottom:1px solid transparent;
+
+      transition:
+        background .6s ease,
+        color .6s ease,
+        border-color .6s ease,
+        backdrop-filter .6s ease;
+
+    }
+
+
+    .navbar.scrolled{
+
+      background:rgba(255,251,242,.94);
+
+      color:var(--black);
+
+      border-color:var(--line-light);
+
+      backdrop-filter:blur(20px);
+
+      -webkit-backdrop-filter:blur(20px);
+
+    }
+
+
+    .logo{
+
+      justify-self:start;
+
+      font-size:21px;
+
+      font-weight:500;
+
+      letter-spacing:.42em;
+
+      line-height:1;
+
+    }
+
+
+    .logo span{
+
+      display:block;
+
+      font-size:7px;
+
+      font-weight:400;
+
+      letter-spacing:.32em;
+
+      margin-top:7px;
+
+      opacity:.65;
+
+    }
+
+
+    .nav-links{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:35px;
+
+      justify-content:center;
+
+    }
+
+
+    .nav-links a{
+
+      position:relative;
+
+      font-size:9px;
+
+      letter-spacing:.2em;
+
+      text-transform:uppercase;
+
+      opacity:.8;
+
+      transition:opacity .3s ease;
+
+    }
+
+
+    .nav-links a::after{
+
+      content:"";
+
+      position:absolute;
+
+      left:0;
+      bottom:-7px;
+
+      width:0;
+
+      height:1px;
+
+      background:currentColor;
+
+      transition:width .35s ease;
+
+    }
+
+
+    .nav-links a:hover{
+      opacity:1;
+    }
+
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+
+    .nav-right{
+
+      justify-self:end;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:18px;
+
+    }
+
+
+    .availability-btn{
+
+      border:1px solid var(--gold);
+
+      padding:12px 17px;
+
+      font-size:8px;
+
+      letter-spacing:.18em;
+
+      text-transform:uppercase;
+
+      transition:
+        background .35s ease,
+        color .35s ease;
+
+    }
+
+
+    .availability-btn:hover{
+
+      background:var(--gold);
+
+      color:var(--black);
+
+    }
+
+
+    .menu-toggle{
+
+      display:none;
+
+      width:38px;
+
+      height:38px;
+
+      border:1px solid currentColor;
+
+      align-items:center;
+
+      justify-content:center;
+
+      flex-direction:column;
+
+      gap:5px;
+
+    }
+
+
+    .menu-toggle span{
+
+      width:15px;
+
+      height:1px;
+
+      background:currentColor;
+
+      transition:transform .3s ease;
+
+    }
+
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    .mobile-menu{
+
+      position:fixed;
+
+      inset:0;
+
+      z-index:450;
+
+      background:var(--black);
+
+      color:var(--cream);
+
+      display:flex;
+
+      flex-direction:column;
+
+      justify-content:center;
+
+      padding:40px;
+
+      opacity:0;
+
+      visibility:hidden;
+
+      transition:
+        opacity .45s ease,
+        visibility .45s ease;
+
+    }
+
+
+    .mobile-menu.open{
+
+      opacity:1;
+
+      visibility:visible;
+
+    }
+
+
+    .mobile-menu-links{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:22px;
+
+    }
+
+
+    .mobile-menu-links a{
+
+      font-family:var(--serif);
+
+      font-size:54px;
+
+      line-height:.9;
+
+      font-weight:500;
+
+    }
+
+
+    .mobile-menu-bottom{
+
+      position:absolute;
+
+      bottom:35px;
+      left:40px;
+      right:40px;
+
+      display:flex;
+
+      justify-content:space-between;
+
+      color:var(--muted-dark);
+
+      font-size:8px;
+
+      letter-spacing:.18em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero{
+
+      position:relative;
+
+      min-height:100svh;
+
+      height:100svh;
+
+      overflow:hidden;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      background:var(--black);
+
+    }
+
+
+    .hero-image{
+
+      position:absolute;
+
+      inset:0;
+
+      z-index:0;
+
+      transform:scale(1.04);
+
+      will-change:transform;
+
+    }
+
+
+    .hero-image img{
+
+      object-position:center 35%;
+
+      filter:saturate(.8);
+
+    }
+
+
+    .hero-overlay{
+
+      position:absolute;
+
+      inset:0;
+
+      z-index:1;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(7,7,8,.48) 0%,
+          rgba(7,7,8,.28) 38%,
+          rgba(7,7,8,.72) 100%
+        );
+
+    }
+
+
+    .hero-content{
+
+      position:relative;
+
+      z-index:2;
+
+      width:min(1250px, calc(100% - 60px));
+
+      text-align:center;
+
+      margin-top:50px;
+
+    }
+
+
+    .hero-eyebrow{
+
+      justify-content:center;
+
+      margin-bottom:28px;
+
+    }
+
+
+    .hero-eyebrow::before{
+
+      display:none;
+
+    }
+
+
+    .hero-title{
+
+      font-family:var(--serif);
+
+      font-weight:500;
+
+      font-size:clamp(68px, 9.3vw, 145px);
+
+      line-height:.78;
+
+      letter-spacing:-.045em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    .hero-title .italic{
+
+      display:block;
+
+      font-style:italic;
+
+      text-transform:none;
+
+      color:var(--gold);
+
+      font-weight:400;
+
+      margin-top:7px;
+
+    }
+
+
+    .hero-subtitle{
+
+      width:min(530px, 100%);
+
+      margin:40px auto 0;
+
+      color:rgba(255,251,242,.72);
+
+      font-size:12px;
+
+      line-height:1.9;
+
+      letter-spacing:.025em;
+
+    }
+
+
+    .hero-actions{
+
+      margin-top:35px;
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      gap:12px;
+
+    }
+
+
+    .hero-btn{
+
+      min-width:190px;
+
+      padding:15px 22px;
+
+      border:1px solid var(--gold);
+
+      font-size:8px;
+
+      font-weight:500;
+
+      letter-spacing:.2em;
+
+      text-transform:uppercase;
+
+      transition:
+        background .4s ease,
+        color .4s ease,
+        transform .4s ease;
+
+    }
+
+
+    .hero-btn.primary{
+
+      background:var(--gold);
+
+      color:var(--black);
+
+    }
+
+
+    .hero-btn.secondary{
+
+      color:var(--cream);
+
+    }
+
+
+    .hero-btn:hover{
+
+      transform:translateY(-3px);
+
+    }
+
+
+    .hero-btn.secondary:hover{
+
+      background:var(--cream);
+
+      color:var(--black);
+
+    }
+
+
+    .hero-bottom{
+
+      position:absolute;
+
+      z-index:3;
+
+      left:42px;
+      right:42px;
+      bottom:30px;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      color:rgba(255,251,242,.58);
+
+      font-size:7px;
+
+      letter-spacing:.24em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    .hero-award{
+
+      position:absolute;
+
+      right:42px;
+
+      bottom:95px;
+
+      z-index:3;
+
+      width:86px;
+
+      height:86px;
+
+      border:1px solid rgba(201,168,106,.7);
+
+      border-radius:50%;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      text-align:center;
+
+      padding:12px;
+
+      color:var(--gold);
+
+      font-size:7px;
+
+      line-height:1.5;
+
+      letter-spacing:.12em;
+
+      text-transform:uppercase;
+
+      animation:slowSpin 18s linear infinite;
+
+    }
+
+
+    @keyframes slowSpin{
+
+      from{
+        transform:rotate(0deg);
+      }
+
+      to{
+        transform:rotate(360deg);
+      }
+
+    }
+
+
+    .scroll-line{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
+
+    }
+
+
+    .scroll-line span{
+
+      width:35px;
+
+      height:1px;
+
+      background:rgba(255,251,242,.45);
+
+      animation:scrollPulse 2s ease-in-out infinite;
+
+    }
+
+
+    @keyframes scrollPulse{
+
+      0%,100%{
+        width:25px;
+      }
+
+      50%{
+        width:45px;
+      }
+
+    }
+
+
+    /* =========================================================
+       MANIFESTO
+       ========================================================= */
+
+    .manifesto{
+
+      position:relative;
+
+      background:var(--cream);
+
+      color:var(--black);
+
+      padding:160px 0;
+
+    }
+
+
+    .manifesto-grid{
+
+      display:grid;
+
+      grid-template-columns:42% 58%;
+
+      gap:70px;
+
+      align-items:start;
+
+    }
+
+
+    .manifesto-visual{
+
+      position:sticky;
+
+      top:130px;
+
+      height:650px;
+
+      overflow:hidden;
+
+    }
+
+
+    .manifesto-visual img{
+
+      object-position:center top;
+
+      filter:saturate(.65) contrast(1.05);
+
+    }
+
+
+    .manifesto-caption{
+
+      position:absolute;
+
+      left:22px;
+      bottom:20px;
+
+      color:rgba(255,251,242,.7);
+
+      font-size:7px;
+
+      letter-spacing:.22em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    .manifesto-copy{
+
+      padding:20px 0 0 40px;
+
+    }
+
+
+    .manifesto-copy .eyebrow{
+
+      margin-bottom:50px;
+
+    }
+
+
+    .manifesto-copy h2{
+
+      font-family:var(--serif);
+
+      font-weight:500;
+
+      font-size:clamp(58px, 6.2vw, 96px);
+
+      line-height:.88;
+
+      letter-spacing:-.045em;
+
+      max-width:760px;
+
+    }
+
+
+    .manifesto-copy h2 em{
+
+      color:var(--gold);
+
+      font-style:italic;
+
+    }
+
+
+    .manifesto-text{
+
+      max-width:530px;
+
+      margin-top:60px;
+
+    }
+
+
+    .manifesto-text p{
+
+      color:#514b43;
+
+      font-size:13px;
+
+      line-height:2;
+
+      margin-bottom:24px;
+
+    }
+
+
+    .signature{
+
+      margin-top:50px;
+
+      font-family:var(--serif);
+
+      font-style:italic;
+
+      font-size:38px;
+
+      color:#29251f;
+
+    }
+
+
+    .signature small{
+
+      display:block;
+
+      margin-top:8px;
+
+      font-family:var(--sans);
+
+      font-style:normal;
+
+      color:var(--muted-light);
+
+      font-size:7px;
+
+      letter-spacing:.2em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    .stats{
+
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      margin-top:80px;
+
+      border-top:1px solid var(--line-light);
+
+      border-left:1px solid var(--line-light);
+
+    }
+
+
+    .stat{
+
+      padding:28px 25px;
+
+      border-right:1px solid var(--line-light);
+
+      border-bottom:1px solid var(--line-light);
+
+    }
+
+
+    .stat strong{
+
+      display:block;
+
+      font-family:var(--serif);
+
+      font-size:45px;
+
+      font-weight:500;
+
+      line-height:1;
+
+      margin-bottom:10px;
+
+    }
+
+
+    .stat span{
+
+      color:var(--muted-light);
+
+      font-size:7px;
+
+      letter-spacing:.17em;
+
+      text-transform:uppercase;
+
+    }
+
+
+    /* =========================================================
+       SECTION DIVIDER
+       ========================================================= */
+
+    .gold-divider{
+
+      width:100%;
+
+      height:1px;
+
+      background:var(--line-dark);
+
+    }
+
+
+    /* =========================================================
+       RESPONSIVE — TABLET
+       ========================================================= */
+
+    @media(max-width:1000px){
+
+      .container{
+        width:min(100% - 50px, 1400px);
+      }
+
+
+      .navbar{
+        padding:0 25px;
+      }
+
+
+      .nav-links{
+        gap:20px;
+      }
+
+
+      .availability-btn{
+        padding:11px 13px;
+      }
+
+
+      .hero-title{
+        font-size:clamp(62px, 10vw, 105px);
+      }
+
+
+      .manifesto{
+        padding:110px 0;
+      }
+
+
+      .manifesto-grid{
+        grid-template-columns:1fr;
+        gap:55px;
+      }
+
+
+      .manifesto-visual{
+
+        position:relative;
+
+        top:auto;
+
+        height:600px;
+
+      }
+
+
+      .manifesto-copy{
+        padding:0;
+      }
+
+
+      .manifesto-copy h2{
+        max-width:850px;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media(max-width:700px){
+
+      :root{
+        --nav-height:70px;
+      }
+
+
+      .container{
+        width:calc(100% - 40px);
+      }
+
+
+      .navbar{
+
+        grid-template-columns:1fr auto;
+
+        padding:0 20px;
+
+      }
+
+
+      .logo{
+
+        font-size:17px;
+
+        letter-spacing:.34em;
+
+      }
+
+
+      .logo span{
+        display:none;
+      }
+
+
+      .nav-links,
+      .nav-right .availability-btn{
+        display:none;
+      }
+
+
+      .nav-right{
+        gap:0;
+      }
+
+
+      .menu-toggle{
+        display:flex;
+      }
+
+
+      .hero{
+
+        min-height:100svh;
+
+        height:auto;
+
+        padding-top:70px;
+
+      }
+
+
+      .hero-image img{
+
+        object-position:62% center;
+
+      }
+
+
+      .hero-content{
+
+        width:calc(100% - 40px);
+
+        margin-top:0;
+
+        padding:100px 0 160px;
+
+      }
+
+
+      .hero-eyebrow{
+
+        font-size:7px;
+
+        letter-spacing:.2em;
+
+      }
+
+
+      .hero-title{
+
+        font-size:clamp(54px, 15vw, 82px);
+
+        line-height:.83;
+
+        letter-spacing:-.05em;
+
+      }
+
+
+      .hero-subtitle{
+
+        font-size:10px;
+
+        line-height:1.8;
+
+        margin-top:30px;
+
+      }
+
+
+      .hero-actions{
+
+        flex-direction:column;
+
+        margin-top:28px;
+
+      }
+
+
+      .hero-btn{
+
+        width:min(270px,100%);
+
+      }
+
+
+      .hero-bottom{
+
+        left:20px;
+
+        right:20px;
+
+        bottom:22px;
+
+        font-size:6px;
+
+      }
+
+
+      .hero-bottom > span:nth-child(2){
+        display:none;
+      }
+
+
+      .hero-award{
+
+        width:68px;
+
+        height:68px;
+
+        right:20px;
+
+        bottom:100px;
+
+        font-size:5px;
+
+      }
+
+
+      .scroll-line{
+        gap:8px;
+      }
+
+
+      .scroll-line span{
+        width:20px;
+      }
+
+
+      .manifesto{
+
+        padding:85px 0;
+
+      }
+
+
+      .manifesto-grid{
+        gap:45px;
+      }
+
+
+      .manifesto-visual{
+        height:500px;
+      }
+
+
+      .manifesto-copy .eyebrow{
+        margin-bottom:32px;
+      }
+
+
+      .manifesto-copy h2{
+
+        font-size:clamp(48px, 13vw, 70px);
+
+        line-height:.9;
+
+      }
+
+
+      .manifesto-text{
+
+        margin-top:38px;
+
+      }
+
+
+      .manifesto-text p{
+
+        font-size:11px;
+
+        line-height:1.9;
+
+      }
+
+
+      .signature{
+
+        margin-top:35px;
+
+        font-size:31px;
+
+      }
+
+
+      .stats{
+
+        margin-top:55px;
+
+      }
+
+
+      .stat{
+
+        padding:22px 16px;
+
+      }
+
+
+      .stat strong{
+        font-size:34px;
+      }
+
+
+      .stat span{
+        font-size:6px;
+        line-height:1.5;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       NAVBAR
+       ========================================================= -->
+
+  <nav class="navbar" id="navbar">
+
+    <a href="#home" class="logo">
+      PHOTO STUDIO
+      <span>ATELIER OF HEIRLOOMS</span>
+    </a>
+
+
+    <div class="nav-links">
+
+      <a href="#work">Work</a>
+
+      <a href="#films">Films</a>
+
+      <a href="#atelier">Atelier</a>
+
+      <a href="#journal">Journal</a>
+
+      <a href="#investment">Investment</a>
+
+    </div>
+
+
+    <div class="nav-right">
+
+      <a href="#contact" class="availability-btn">
+        Check Availability 2026–27
+      </a>
+
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open menu"
+      >
+
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =========================================================
+       MOBILE MENU
+       ========================================================= -->
+
+  <div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-menu-links">
+
+      <a href="#home">Home</a>
+
+      <a href="#work">Work</a>
+
+      <a href="#films">Films</a>
+
+      <a href="#atelier">Atelier</a>
+
+      <a href="#investment">Investment</a>
+
+      <a href="#contact">Contact</a>
+
+    </div>
+
+
+    <div class="mobile-menu-bottom">
+
+      <span>Bhopal · India</span>
+
+      <span>Available Worldwide</span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+
+  <header class="hero" id="home">
+
+
+    <div class="hero-image" id="heroImage">
+
+      <img
+        src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=2400&q=92"
+        alt="Luxury Indian wedding editorial"
+      >
+
+    </div>
+
+
+    <div class="hero-overly>
+    erlay"></div>
+
+<div class="hero-content">
+
+
+  <div class="eyebrow hero-eyebrow">
+    BHOPAL · UDAIPUR · DELHI · DUBAI
+  </div>
+
+
+  <h1 class="hero-title">
+
+    WE DON'T<br>
+
+    CAPTURE MOMENTS
+
+    <span class="italic">
+      We craft heirlooms.
+    </span>
+
+  </h1>
+
+
+  <p class="hero-subtitle">
+
+    Luxury wedding photography & films for families
+    who value heritage over trends. 300+ celebrations,
+    years of crafting photographs meant to live beyond
+    a single generation.
+
+  </p>
+
+
+  <div class="hero-actions">
+
+    <a
+      href="#work"
+      class="hero-btn primary"
+    >
+      View Signature Work
+    </a>
+
+
+    <a
+      href="#films"
+      class="hero-btn secondary"
+    >
+      Watch Films
+    </a>
+
+  </div>
+
+</div>
+
+
+<div class="hero-award">
+  12×<br>
+  INTERNATIONAL<br>
+  AWARD WINNER
+</div>
+
+
+<div class="hero-bottom">
+
+  <div class="scroll-line">
+
+    <span></span>
+
+    <div>
+      Scroll to discover
+    </div>
+
+  </div>
+
+
+  <span>
+    Luxury Wedding Atelier
+  </span>
+
+
+  <span>
+    Available Worldwide
+  </span>
+
+</div>
+
+  </header>  <!-- =========================================================
+       MANIFESTO / ABOUT THE ARTIST
+       ========================================================= -->  <section class="manifesto" id="atelier"><div class="container">
+
+  <div class="manifesto-grid">
+
+
+    <div class="manifesto-visual reveal">
+
+      <img
+        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&q=90"
+        alt="Photographer portrait"
+        loading="lazy"
+      >
+
+      <div class="manifesto-caption">
+        THE ARTIST · PHOTO STUDIO
+      </div>
+
+    </div>
+
+
+    <div class="manifesto-copy">
+
+
+      <div class="eyebrow reveal">
+        THE ATELIER
+      </div>
+
+
+      <h2 class="reveal">
+
+        Behind every
+        royal frame is an
+        <em>obsession</em>
+        for detail.
+
+      </h2>
+
+
+      <div class="manifesto-text">
+
+
+        <p class="reveal">
+
+          We don't believe in documenting a wedding
+          from the sidelines. We believe in understanding
+          its rhythm — the rituals, the silences, the
+          people and the heritage behind them.
+
+        </p>
+
+
+        <p class="reveal">
+
+          Our work is intentionally limited. We take on
+          a select number of celebrations every year,
+          allowing us to enter each wedding with the
+          same patience and attention we would give
+          to a piece of art.
+
+        </p>
+
+
+        <p class="reveal">
+
+          From the first handwritten invitation to the
+          final dance, every frame is created with one
+          thought in mind: will this still mean something
+          fifty years from now?
+
+        </p>
+
+
+        <div class="signature reveal">
+
+          Photo Studio
+
+          <small>
+            Atelier of Heirlooms
+          </small>
+
+        </div>
+
+
+        <div class="stats reveal">
+
+
+          <div class="stat">
+
+            <strong>300+</strong>
+
+            <span>
+              Weddings Documented
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>08</strong>
+
+            <span>
+              Years of Atelier
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>12</strong>
+
+            <span>
+              International Awards
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>20</strong>
+
+            <span>
+              Weddings Per Year Only
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+  </section>  <div class="gold-divider"></div>  <!-- =========================================================
+       END OF PART 1
+       ========================================================= -->
+That is the **end of Part 1**.
+<!-- =========================================================
+     SECTION 03 — ATELIER SERVICES
+========================================================= -->
+
+<section class="services-section" id="atelier">
+
+  <div class="container">
+
+    <div class="section-intro reveal">
+      <div>
+        <span class="eyebrow dark-eyebrow">03 / ATELIER SERVICES</span>
+      </div>
+
+      <div class="section-intro-copy">
+        <h2>Bespoke documentation,<br><em>tailored like couture.</em></h2>
+
+        <p>
+          Every celebration is approached as an editorial story —
+          photographed, filmed and preserved with obsessive attention
+          to detail.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="services-grid">
+
+      <!-- CARD 01 -->
+      <article class="service-card service-card-image reveal">
+
+        <div class="service-image">
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=90"
+            alt="Luxury Indian wedding couple"
+            loading="lazy"
+          >
+
+          <div class="service-image-overlay"></div>
+
+          <span class="service-number">01</span>
+
+          <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service-content">
+
+          <div class="service-meta">
+            <span>PHOTOGRAPHY</span>
+            <span>FROM ₹4.5L</span>
+          </div>
+
+          <h3>The Still Atelier</h3>
+
+          <p>
+            Editorial photography for ceremonies, portraits,
+            rituals and every quiet detail in between.
+          </p>
+
+          <div class="service-line"></div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CARD 02 -->
+      <article class="service-card service-card-dark reveal">
+
+        <div class="service-image">
+          <img
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=90"
+            alt="Luxury wedding ceremony"
+            loading="lazy"
+          >
+
+          <div class="service-image-overlay"></div>
+
+          <span class="service-number">02</span>
+
+          <span class="service-badge">
+            MOST RESERVED
+          </span>
+
+          <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service-content">
+
+          <div class="service-meta">
+            <span>FILMS</span>
+            <span>FROM ₹5.5L</span>
+          </div>
+
+          <h3>The Motion Atelier</h3>
+
+          <p>
+            Cinematic wedding films crafted with the pace,
+            emotion and atmosphere of a feature film.
+          </p>
+
+          <div class="service-line"></div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CARD 03 -->
+      <article class="service-card service-card-image reveal">
+
+        <div class="service-image">
+          <img
+            src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1800&q=90"
+            alt="Destination wedding editorial"
+            loading="lazy"
+          >
+
+          <div class="service-image-overlay"></div>
+
+          <span class="service-number">03</span>
+
+          <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service-content">
+
+          <div class="service-meta">
+            <span>DESTINATION</span>
+            <span>BY COMMISSION</span>
+          </div>
+
+          <h3>The Prelude</h3>
+
+          <p>
+            Pre-wedding stories created across Jaipur, Udaipur,
+            Dubai and wherever your story takes you.
+          </p>
+
+          <div class="service-line"></div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CARD 04 -->
+      <article class="service-card service-card-image reveal">
+
+        <div class="service-image">
+          <img
+            src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1800&q=90"
+            alt="Luxury wedding heirloom album"
+            loading="lazy"
+          >
+
+          <div class="service-image-overlay"></div>
+
+          <span class="service-number">04</span>
+
+          <span class="service-arrow">↗</span>
+        </div>
+
+        <div class="service-content">
+
+          <div class="service-meta">
+            <span>HEIRLOOM</span>
+            <span>BESPOKE</span>
+          </div>
+
+          <h3>The Heirloom Box</h3>
+
+          <p>
+            Handcrafted albums and archival prints designed to
+            become part of your family's visual history.
+          </p>
+
+          <div class="service-line"></div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SECTION 04 — SIGNATURE WORK
+========================================================= -->
+
+<section class="work-section" id="work">
+
+  <div class="container">
+
+    <div class="work-heading reveal">
+
+      <div>
+        <span class="eyebrow">04 / SIGNATURE WORK</span>
+      </div>
+
+      <div class="work-heading-main">
+        <h2>
+          Selected<br>
+          <em>Heirlooms</em>
+        </h2>
+
+        <span class="work-year">2023 — 2026</span>
+      </div>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="work-filters reveal">
+
+      <button class="filter-btn active" data-filter="all">
+        All
+      </button>
+
+      <button class="filter-btn" data-filter="palace">
+        Palace Weddings
+      </button>
+
+      <button class="filter-btn" data-filter="rituals">
+        Hindu Rituals
+      </button>
+
+      <button class="filter-btn" data-filter="intimate">
+        Intimate
+      </button>
+
+      <button class="filter-btn" data-filter="prewedding">
+        Pre-Wedding
+      </button>
+
+    </div>
+
+
+    <!-- MASONRY GRID -->
+
+    <div class="portfolio-grid">
+
+
+      <!-- IMAGE 01 -->
+
+      <button
+        class="portfolio-item portfolio-tall reveal"
+        data-category="palace"
+        data-image="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2200&q=92"
+        data-title="A Palace Affair"
+        data-location="UDAIPUR · RAJASTHAN"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1800&q=90"
+          alt="Luxury palace wedding"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>A PALACE AFFAIR</small>
+          <strong>UDAIPUR · RAJASTHAN</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 02 -->
+
+      <button
+        class="portfolio-item portfolio-standard reveal"
+        data-category="rituals"
+        data-image="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=2200&q=92"
+        data-title="Sacred Rituals"
+        data-location="JAIPUR · RAJASTHAN"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1800&q=90"
+          alt="Indian wedding ceremony"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>SACRED RITUALS</small>
+          <strong>JAIPUR · RAJASTHAN</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 03 -->
+
+      <button
+        class="portfolio-item portfolio-wide reveal"
+        data-category="intimate"
+        data-image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=92"
+        data-title="The Quiet Vow"
+        data-location="DELHI · INDIA"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=90"
+          alt="Elegant wedding couple"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>THE QUIET VOW</small>
+          <strong>DELHI · INDIA</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 04 -->
+
+      <button
+        class="portfolio-item portfolio-standard reveal"
+        data-category="prewedding"
+        data-image="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=2200&q=92"
+        data-title="Before Forever"
+        data-location="DUBAI · UAE"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1800&q=90"
+          alt="Destination couple portrait"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>BEFORE FOREVER</small>
+          <strong>DUBAI · UAE</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 05 -->
+
+      <button
+        class="portfolio-item portfolio-tall reveal"
+        data-category="palace"
+        data-image="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=2200&q=92"
+        data-title="Royal Evenings"
+        data-location="UDAIPUR · INDIA"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1800&q=90"
+          alt="Royal Indian wedding evening"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>ROYAL EVENINGS</small>
+          <strong>UDAIPUR · INDIA</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 06 -->
+
+      <button
+        class="portfolio-item portfolio-standard reveal"
+        data-category="rituals"
+        data-image="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=2200&q=92"
+        data-title="The Ceremony"
+        data-location="BHOPAL · INDIA"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1800&q=90"
+          alt="Indian wedding ceremony"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>THE CEREMONY</small>
+          <strong>BHOPAL · INDIA</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 07 -->
+
+      <button
+        class="portfolio-item portfolio-wide reveal"
+        data-category="intimate"
+        data-image="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2200&q=92"
+        data-title="After The Vows"
+        data-location="JAIPUR · INDIA"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=90"
+          alt="Elegant wedding reception"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>AFTER THE VOWS</small>
+          <strong>JAIPUR · INDIA</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 08 -->
+
+      <button
+        class="portfolio-item portfolio-standard reveal"
+        data-category="prewedding"
+        data-image="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=2200&q=92"
+        data-title="A Prelude"
+        data-location="DUBAI · UAE"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1800&q=90"
+          alt="Destination pre-wedding couple"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>A PRELUDE</small>
+          <strong>DUBAI · UAE</strong>
+        </span>
+
+      </button>
+
+
+      <!-- IMAGE 09 -->
+
+      <button
+        class="portfolio-item portfolio-tall reveal"
+        data-category="palace"
+        data-image="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=2200&q=92"
+        data-title="The Heirloom"
+        data-location="JAIPUR · INDIA"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1800&q=90"
+          alt="Luxury Indian wedding portrait"
+          loading="lazy"
+        >
+
+        <span class="portfolio-overlay"></span>
+
+        <span class="portfolio-caption">
+          <small>THE HEIRLOOM</small>
+          <strong>JAIPUR · INDIA</strong>
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <div class="archive-cta reveal">
+
+      <span>
+        300+ CELEBRATIONS DOCUMENTED
+      </span>
+
+      <a href="#contact">
+        VIEW FULL ARCHIVE
+        <b>↗</b>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LIGHTBOX
+========================================================= -->
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+    ×
+  </button>
+
+  <button
+    class="lightbox-prev"
+    id="lightboxPrev"
+    aria-label="Previous image"
+  >
+    ←
+  </button>
+
+  <div class="lightbox-stage">
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt=""
+    >
+
+    <div class="lightbox-details">
+
+      <span id="lightboxTitle">
+        THE HEIRLOOM
+      </span>
+
+      <small id="lightboxLocation">
+        JAIPUR · INDIA
+      </small>
+
+    </div>
+
+  </div>
+
+  <button
+    class="lightbox-next"
+    id="lightboxNext"
+    aria-label="Next image"
+  >
+    →
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     PART 2 STYLES
+========================================================= -->
+
+<style>
+
+  /* =========================
+     SERVICES
+  ========================= */
+
+  .services-section{
+    background:var(--cream);
+    color:var(--black);
+    padding:140px 0 160px;
+  }
+
+  .section-intro{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    margin-bottom:90px;
+  }
+
+  .dark-eyebrow{
+    color:#756d61;
+  }
+
+  .section-intro-copy{
+    max-width:820px;
+  }
+
+  .section-intro-copy h2{
+    font-family:var(--serif);
+    font-size:clamp(54px,6vw,92px);
+    font-weight:600;
+    line-height:.91;
+    letter-spacing:-.045em;
+    margin:0 0 35px;
+  }
+
+  .section-intro-copy h2 em{
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .section-intro-copy p{
+    max-width:510px;
+    font-size:14px;
+    line-height:1.9;
+    color:var(--muted-light);
+    font-weight:300;
+  }
+
+
+  .services-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px 28px;
+  }
+
+  .service-card{
+    position:relative;
+    overflow:hidden;
+  }
+
+  .service-image{
+    height:560px;
+    position:relative;
+    overflow:hidden;
+    background:#151515;
+  }
+
+  .service-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 1.2s cubic-bezier(.16,1,.3,1);
+    filter:saturate(.88);
+  }
+
+  .service-card:hover .service-image img{
+    transform:scale(1.045);
+  }
+
+  .service-image-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.08),
+      rgba(0,0,0,.02) 45%,
+      rgba(0,0,0,.6)
+    );
+  }
+
+  .service-number{
+    position:absolute;
+    top:24px;
+    left:25px;
+    color:var(--cream);
+    font-family:var(--sans);
+    font-size:10px;
+    letter-spacing:.2em;
+  }
+
+  .service-arrow{
+    position:absolute;
+    right:25px;
+    top:18px;
+    color:var(--cream);
+    font-size:25px;
+    font-weight:200;
+    transition:.4s ease;
+  }
+
+  .service-card:hover .service-arrow{
+    color:var(--gold);
+    transform:translate(4px,-4px);
+  }
+
+  .service-badge{
+    position:absolute;
+    right:25px;
+    bottom:25px;
+    color:var(--gold);
+    border:1px solid rgba(201,168,106,.65);
+    padding:8px 12px;
+    font-family:var(--sans);
+    font-size:8px;
+    letter-spacing:.18em;
+  }
+
+  .service-content{
+    padding:25px 2px 0;
+  }
+
+  .service-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:9px;
+    letter-spacing:.18em;
+    color:#7b7368;
+    margin-bottom:14px;
+  }
+
+  .service-content h3{
+    font-family:var(--serif);
+    font-size:43px;
+    line-height:1;
+    font-weight:600;
+    letter-spacing:-.025em;
+    margin:0 0 14px;
+  }
+
+  .service-content p{
+    max-width:460px;
+    color:#6d665c;
+    font-size:13px;
+    line-height:1.8;
+    font-weight:300;
+    margin:0;
+  }
+
+  .service-line{
+    width:100%;
+    height:1px;
+    background:var(--line-light);
+    margin-top:25px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .service-line:after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:0;
+    background:var(--gold);
+    transition:width .8s cubic-bezier(.16,1,.3,1);
+  }
+
+  .service-card:hover .service-line:after{
+    width:100%;
+  }
+
+  .service-card-dark{
+    background:var(--black);
+    color:var(--cream);
+    padding:0 0 28px;
+  }
+
+  .service-card-dark .service-content{
+    padding:25px 28px 0;
+  }
+
+  .service-card-dark .service-meta{
+    color:rgba(255,251,242,.48);
+  }
+
+  .service-card-dark .service-content p{
+    color:rgba(255,251,242,.58);
+  }
+
+  .service-card-dark .service-line{
+    background:rgba(255,251,242,.15);
+  }
+
+
+  /* =========================
+     SIGNATURE WORK
+  ========================= */
+
+  .work-section{
+    background:var(--black);
+    color:var(--cream);
+    padding:150px 0 120px;
+  }
+
+  .work-heading{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    align-items:end;
+    margin-bottom:75px;
+  }
+
+  .work-heading-main{
+    position:relative;
+  }
+
+  .work-heading-main h2{
+    font-family:var(--serif);
+    font-size:clamp(70px,10vw,145px);
+    line-height:.77;
+    letter-spacing:-.055em;
+    font-weight:600;
+    margin:0;
+  }
+
+  .work-heading-main h2 em{
+    color:var(--cream);
+    font-weight:400;
+  }
+
+  .work-year{
+    display:block;
+    color:var(--gold);
+    font-family:var(--serif);
+    font-size:23px;
+    font-style:italic;
+    margin-top:25px;
+  }
+
+
+  .work-filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    border-top:1px solid var(--line-dark);
+    border-bottom:1px solid var(--line-dark);
+    padding:18px 0;
+    margin-bottom:55px;
+  }
+
+  .filter-btn{
+    appearance:none;
+    border:1px solid rgba(255,251,242,.18);
+    background:transparent;
+    color:rgba(255,251,242,.55);
+    padding:10px 16px;
+    font-family:var(--sans);
+    font-size:9px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:.35s ease;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active{
+    border-color:var(--gold);
+    color:var(--gold);
+  }
+
+
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    align-items:start;
+  }
+
+  .portfolio-item{
+    appearance:none;
+    border:0;
+    padding:0;
+    margin:0;
+    width:100%;
+    position:relative;
+    overflow:hidden;
+    background:#111;
+    cursor:pointer;
+    display:block;
+    text-align:left;
+  }
+
+  .portfolio-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:
+      transform 1.2s cubic-bezier(.16,1,.3,1),
+      filter .7s ease;
+    filter:saturate(.82);
+  }
+
+  .portfolio-standard{
+    aspect-ratio:4 / 5;
+  }
+
+  .portfolio-tall{
+    aspect-ratio:3 / 4.7;
+  }
+
+  .portfolio-wide{
+    aspect-ratio:4 / 3;
+  }
+
+  .portfolio-item:hover img{
+    transform:scale(1.045);
+    filter:saturate(1);
+  }
+
+  .portfolio-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      to top,
+      rgba(7,7,8,.78),
+      transparent 52%
+    );
+    opacity:0;
+    transition:opacity .5s ease;
+  }
+
+  .portfolio-item:hover .portfolio-overlay{
+    opacity:1;
+  }
+
+  .portfolio-caption{
+    position:absolute;
+    left:22px;
+    bottom:20px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:.55s cubic-bezier(.16,1,.3,1);
+  }
+
+  .portfolio-item:hover .portfolio-caption{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .portfolio-caption small{
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:.2em;
+  }
+
+    .portfolio-caption small{
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:.2em;
+  }
+
+  .portfolio-caption strong{
+    color:var(--cream);
+    font-size:9px;
+    letter-spacing:.13em;
+    font-weight:400;
+  }
+
+  .archive-cta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid var(--line-dark);
+    margin-top:65px;
+    padding-top:22px;
+  }
+
+  .archive-cta span{
+    color:rgba(255,251,242,.42);
+    font-size:9px;
+    letter-spacing:.18em;
+  }
+
+  .archive-cta a{
+    color:var(--cream);
+    text-decoration:none;
+    font-size:10px;
+    letter-spacing:.16em;
+    transition:.3s ease;
+  }
+
+  .archive-cta a b{
+    color:var(--gold);
+    font-size:17px;
+    margin-left:12px;
+    font-weight:400;
+  }
+
+  .archive-cta a:hover{
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     LIGHTBOX
+  ========================= */
+
+  .lightbox{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:rgba(7,7,8,.97);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:.45s ease;
+  }
+
+  .lightbox.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+  }
+
+  .lightbox-stage{
+    width:min(82vw,1200px);
+    height:86vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .lightbox-stage img{
+    max-width:100%;
+    max-height:78vh;
+    object-fit:contain;
+    display:block;
+  }
+
+  .lightbox-details{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+  }
+
+  .lightbox-details span{
+    color:var(--cream);
+    font-family:var(--serif);
+    font-size:22px;
+  }
+
+  .lightbox-details small{
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:.17em;
+    align-self:end;
+  }
+
+  .lightbox-close,
+  .lightbox-prev,
+  .lightbox-next{
+    position:absolute;
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:var(--cream);
+    cursor:pointer;
+    font-weight:200;
+    transition:.3s ease;
+    z-index:5;
+  }
+
+  .lightbox-close{
+    top:25px;
+    right:30px;
+    font-size:38px;
+    line-height:1;
+  }
+
+  .lightbox-prev,
+  .lightbox-next{
+    top:50%;
+    transform:translateY(-50%);
+    font-size:28px;
+    padding:25px;
+  }
+
+  .lightbox-prev{
+    left:18px;
+  }
+
+  .lightbox-next{
+    right:18px;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-prev:hover,
+  .lightbox-next:hover{
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     SERVICES + WORK MOBILE
+  ========================= */
+
+  @media(max-width:900px){
+
+    .services-section,
+    .work-section{
+      padding:100px 0;
+    }
+
+    .section-intro,
+    .work-heading{
+      grid-template-columns:1fr;
+      gap:30px;
+      margin-bottom:55px;
+    }
+
+    .section-intro-copy h2{
+      font-size:58px;
+    }
+
+    .services-grid{
+      grid-template-columns:1fr;
+      gap:65px;
+    }
+
+    .service-image{
+      height:500px;
+    }
+
+    .portfolio-grid{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .portfolio-wide{
+      grid-column:span 2;
+    }
+
+    .work-heading-main h2{
+      font-size:82px;
+    }
+
+  }
+
+
+  @media(max-width:600px){
+
+    .services-section,
+    .work-section{
+      padding:80px 0;
+    }
+
+    .section-intro-copy h2{
+      font-size:49px;
+    }
+
+    .section-intro-copy p{
+      font-size:13px;
+    }
+
+    .service-image{
+      height:430px;
+    }
+
+    .service-content h3{
+      font-size:36px;
+    }
+
+    .service-card-dark .service-content{
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    .work-heading-main h2{
+      font-size:70px;
+    }
+
+    .work-filters{
+      gap:7px;
+      overflow-x:auto;
+      flex-wrap:nowrap;
+      scrollbar-width:none;
+      margin-left:-5px;
+      margin-right:-5px;
+      padding-left:5px;
+      padding-right:5px;
+    }
+
+    .work-filters::-webkit-scrollbar{
+      display:none;
+    }
+
+    .filter-btn{
+      flex:0 0 auto;
+      padding:9px 13px;
+      font-size:8px;
+    }
+
+    .portfolio-grid{
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .portfolio-wide{
+      grid-column:auto;
+    }
+
+    .portfolio-standard,
+    .portfolio-tall,
+    .portfolio-wide{
+      aspect-ratio:4 / 5;
+    }
+
+    .portfolio-caption{
+      opacity:1;
+      transform:none;
+    }
+
+    .portfolio-overlay{
+      opacity:1;
+    }
+
+    .archive-cta{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:18px;
+    }
+
+    .lightbox-stage{
+      width:88vw;
+      height:auto;
+    }
+
+    .lightbox-stage img{
+      max-height:70vh;
+    }
+
+    .lightbox-details{
+      flex-direction:column;
+      gap:5px;
+    }
+
+    .lightbox-prev{
+      left:0;
+    }
+
+    .lightbox-next{
+      right:0;
+    }
+
+  }
+
+</style>
+
+
+<!-- =========================================================
+     END OF PART 2
+========================================================= -->
+
+<!-- PART 3 STARTS BELOW -->
+<!-- =========================================================
+     SECTION 05 — CINEMA / FILMS
+========================================================= -->
+
+<section class="cinema-section" id="films">
+
+  <div class="container">
+
+    <div class="cinema-header reveal">
+
+      <div>
+        <span class="eyebrow">05 / CINEMA</span>
+      </div>
+
+      <div>
+        <h2>
+          Stories that<br>
+          <em>move.</em>
+        </h2>
+
+        <p>
+          Wedding films composed with the restraint of cinema —
+          intimate, atmospheric and made to be watched decades
+          from now.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="cinema-feature reveal">
+
+      <div class="cinema-main">
+
+        <div class="cinema-poster">
+
+          <img
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2400&q=92"
+            alt="Luxury wedding film"
+            loading="lazy"
+          >
+
+          <div class="cinema-poster-overlay"></div>
+
+          <button
+            class="cinema-play"
+            type="button"
+            aria-label="Play wedding film"
+          >
+            <span>PLAY</span>
+            <i>→</i>
+          </button>
+
+          <div class="cinema-poster-info">
+            <span>01</span>
+            <span>04:38</span>
+          </div>
+
+        </div>
+
+        <div class="cinema-main-caption">
+
+          <div>
+            <span class="cinema-label">
+              SIGNATURE FILM
+            </span>
+
+            <h3>
+              The Palace<br>
+              Between Us
+            </h3>
+          </div>
+
+          <div class="cinema-location">
+            <span>THE OBEROI UDAIVILAS</span>
+            <small>UDAIPUR · INDIA</small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cinema-side">
+
+
+        <article class="film-small reveal">
+
+          <div class="film-small-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1500&q=88"
+              alt="Wedding film"
+              loading="lazy"
+            >
+
+            <span class="film-play">▶</span>
+
+          </div>
+
+          <div class="film-small-info">
+
+            <div>
+              <span>02 / FILM</span>
+              <h4>Letters To Forever</h4>
+            </div>
+
+            <small>
+              03:52<br>
+              JAIPUR
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <article class="film-small reveal">
+
+          <div class="film-small-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1500&q=88"
+              alt="Destination wedding film"
+              loading="lazy"
+            >
+
+            <span class="film-play">▶</span>
+
+          </div>
+
+          <div class="film-small-info">
+
+            <div>
+              <span>03 / FILM</span>
+              <h4>A Day In Dubai</h4>
+            </div>
+
+            <small>
+              05:14<br>
+              DUBAI
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <a href="#contact" class="film-archive">
+          WATCH THE FILM ARCHIVE
+          <span>↗</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SECTION 06 — PRESS / SOCIAL PROOF
+========================================================= -->
+
+<section class="proof-section">
+
+  <div class="container">
+
+
+    <div class="press-heading reveal">
+
+      <span class="eyebrow dark-eyebrow">
+        06 / RECOGNISED
+      </span>
+
+      <p>
+        Featured, trusted and celebrated by the world's
+        leading wedding publications.
+      </p>
+
+    </div>
+
+
+    <div class="press-marquee">
+
+      <div class="press-track">
+
+        <span>VOGUE</span>
+        <i></i>
+        <span>WEDDING SUTRA</span>
+        <i></i>
+        <span>WEDMEGOOD</span>
+        <i></i>
+        <span>ZOLA</span>
+        <i></i>
+
+        <span>VOGUE</span>
+        <i></i>
+        <span>WEDDING SUTRA</span>
+        <i></i>
+        <span>WEDMEGOOD</span>
+        <i></i>
+        <span>ZOLA</span>
+        <i></i>
+
+      </div>
+
+    </div>
+
+
+    <div class="testimonial-area reveal">
+
+      <div class="testimonial-counter">
+        <span>01</span>
+        <span>/ 03</span>
+      </div>
+
+      <div class="testimonial-quote">
+
+        <span class="quote-mark">“</span>
+
+        <blockquote>
+          They didn't simply photograph our wedding.
+          They understood the feeling of it.
+          Every frame feels like a memory we were
+          somehow lucky enough to keep forever.
+        </blockquote>
+
+        <div class="testimonial-author">
+
+          <span>
+            AARAV &amp; MEERA
+          </span>
+
+          <small>
+            UDAIPUR · 2025
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="testimonial-controls">
+
+        <button
+          type="button"
+          class="testimonial-prev"
+          aria-label="Previous testimonial"
+        >
+          ←
+        </button>
+
+        <div class="testimonial-line">
+          <span></span>
+        </div>
+
+        <button
+          type="button"
+          class="testimonial-next"
+          aria-label="Next testimonial"
+        >
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SECTION 07 — INVESTMENT
+========================================================= -->
+
+<section class="investment-section" id="investment">
+
+  <div class="container">
+
+
+    <div class="investment-header reveal">
+
+      <div>
+        <span class="eyebrow dark-eyebrow">
+          07 / THE INVESTMENT
+        </span>
+      </div>
+
+      <div>
+
+        <h2>
+          We take only<br>
+          <em>20 weddings a year.</em>
+        </h2>
+
+        <p>
+          Our collections are intentionally limited so every
+          couple receives the same level of attention,
+          preparation and artistic direction.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="investment-note reveal">
+
+      <span>
+        BESPOKE COLLECTIONS
+      </span>
+
+      <p>
+        Every celebration is different. Final collections are
+        tailored around your destination, guest count,
+        number of events and desired coverage.
+      </p>
+
+    </div>
+
+
+    <div class="investment-table reveal">
+
+
+      <!-- SILVER -->
+
+      <article class="investment-row">
+
+        <div class="investment-name">
+
+          <span>01</span>
+
+          <h3>Silver Atelier</h3>
+
+          <p>
+            Essential documentation
+          </p>
+
+        </div>
+
+        <div class="investment-details">
+
+          <span>PHOTOGRAPHY</span>
+
+          <span>2 DAYS COVERAGE</span>
+
+          <span>1 ARTIST TEAM</span>
+
+        </div>
+
+        <div class="investment-price">
+
+          <small>STARTS FROM</small>
+
+          <strong>₹4.5L</strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- GOLD -->
+
+      <article class="investment-row investment-featured">
+
+        <div class="investment-name">
+
+          <span>02</span>
+
+          <h3>Gold Atelier</h3>
+
+          <p>
+            Our signature collection
+          </p>
+
+          <b>RECOMMENDED</b>
+
+        </div>
+
+        <div class="investment-details">
+
+          <span>PHOTO + FILM</span>
+
+          <span>3 DAYS COVERAGE</span>
+
+          <span>FULL ARTIST TEAM</span>
+
+        </div>
+
+        <div class="investment-price">
+
+          <small>STARTS FROM</small>
+
+          <strong>₹8L</strong>
+
+        </div>
+
+      </article>
+
+
+      <!-- ROYAL -->
+
+      <article class="investment-row">
+
+        <div class="investment-name">
+
+          <span>03</span>
+
+          <h3>Royal Atelier</h3>
+
+          <p>
+            Complete heirloom experience
+          </p>
+
+        </div>
+
+        <div class="investment-details">
+
+          <span>PHOTO + CINEMA</span>
+
+          <span>4+ DAYS COVERAGE</span>
+
+          <span>DESTINATION TEAM</span>
+
+        </div>
+
+        <div class="investment-price">
+
+          <small>AVERAGE</small>
+
+          <strong>₹15L+</strong>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+
+    <div class="investment-bottom reveal">
+
+      <p>
+        Most celebrations we document fall between
+        <strong>₹8L — ₹15L+</strong>, depending on scale
+        and destination.
+      </p>
+
+      <a href="#contact">
+        REQUEST THE FULL INVESTMENT GUIDE
+        <span>↗</span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PART 3 STYLES
+========================================================= -->
+
+<style>
+
+  /* =========================
+     CINEMA
+  ========================= */
+
+  .cinema-section{
+    background:var(--black);
+    color:var(--cream);
+    padding:150px 0 160px;
+  }
+
+  .cinema-header{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    margin-bottom:80px;
+  }
+
+  .cinema-header h2{
+    font-family:var(--serif);
+    font-size:clamp(70px,9vw,125px);
+    line-height:.78;
+    letter-spacing:-.055em;
+    font-weight:600;
+    margin:0 0 35px;
+  }
+
+  .cinema-header h2 em{
+    color:var(--gold);
+    font-weight:400;
+  }
+
+  .cinema-header p{
+    max-width:480px;
+    color:var(--muted-dark);
+    font-size:13px;
+    line-height:1.9;
+    font-weight:300;
+  }
+
+
+  .cinema-feature{
+    display:grid;
+    grid-template-columns:minmax(0,1.75fr) minmax(280px,.75fr);
+    gap:35px;
+    align-items:start;
+  }
+
+  .cinema-main{
+    min-width:0;
+  }
+
+  .cinema-poster{
+    position:relative;
+    aspect-ratio:16 / 9;
+    overflow:hidden;
+    background:#111;
+  }
+
+  .cinema-poster img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.78);
+    transition:transform 1.3s cubic-bezier(.16,1,.3,1);
+  }
+
+  .cinema-main:hover .cinema-poster img{
+    transform:scale(1.025);
+  }
+
+  .cinema-poster-overlay{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(7,7,8,.7),
+        transparent 55%
+      );
+  }
+
+  .cinema-play{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:92px;
+    height:92px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    background:rgba(7,7,8,.2);
+    color:var(--gold);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    transition:.5s ease;
+    backdrop-filter:blur(8px);
+  }
+
+  .cinema-play span{
+    font-size:7px;
+    letter-spacing:.2em;
+  }
+
+  .cinema-play i{
+    font-size:18px;
+    font-style:normal;
+  }
+
+  .cinema-play:hover{
+    background:var(--gold);
+    color:var(--black);
+    transform:translate(-50%,-50%) scale(1.06);
+  }
+
+  .cinema-poster-info{
+    position:absolute;
+    left:25px;
+    right:25px;
+    bottom:20px;
+    display:flex;
+    justify-content:space-between;
+    color:rgba(255,251,242,.6);
+    font-size:8px;
+    letter-spacing:.18em;
+  }
+
+  .cinema-main-caption{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    padding-top:25px;
+    border-top:1px solid var(--line-dark);
+    margin-top:15px;
+  }
+
+  .cinema-label{
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:.2em;
+  }
+
+  .cinema-main-caption h3{
+    font-family:var(--serif);
+    font-size:43px;
+    line-height:.9;
+    letter-spacing:-.03em;
+    font-weight:500;
+    margin:13px 0 0;
+  }
+
+  .cinema-location{
+    text-align:right;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding-top:8px;
+  }
+
+  .cinema-location span{
+    font-size:9px;
+    letter-spacing:.16em;
+  }
+
+  .cinema-location small{
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:.18em;
+  }
+
+
+  .cinema-side{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+
+  .film-small{
+    border-bottom:1px solid var(--line-dark);
+    padding-bottom:25px;
+  }
+
+  .film-small-image{
+    position:relative;
+    aspect-ratio:16 / 10;
+    overflow:hidden;
+    background:#111;
+  }
+
+  .film-small-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.75);
+    transition:transform .9s cubic-bezier(.16,1,.3,1);
+  }
+
+  .film-small:hover img{
+    transform:scale(1.04);
+  }
+
+  .film-play{
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    width:38px;
+    height:38px;
+    border:1px solid rgba(201,168,106,.7);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:9px;
+    background:rgba(7,7,8,.35);
+  }
+
+  .film-small-info{
+    display:flex;
+    justify-content:space-between;
+    padding-top:15px;
+  }
+
+  .film-small-info span{
+    color:var(--gold);
+    font-size:7px;
+    letter-spacing:.18em;
+  }
+
+  .film-small-info h4{
+    font-family:var(--serif);
+    font-size:25px;
+    font-weight:500;
+    margin:6px 0 0;
+  }
+
+  .film-small-info small{
+    color:rgba(255,251,242,.45);
+    font-size:7px;
+    line-height:1.7;
+    letter-spacing:.15em;
+    text-align:right;
+  }
+
+  .film-archive{
+    color:var(--cream);
+    text-decoration:none;
+    font-size:9px;
+    letter-spacing:.17em;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 0;
+    transition:.3s ease;
+  }
+
+  .film-archive span{
+    color:var(--gold);
+    font-size:17px;
+  }
+
+  .film-archive:hover{
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     SOCIAL PROOF
+  ========================= */
+
+  .proof-section{
+    background:var(--cream);
+    color:var(--black);
+    padding:135px 0 150px;
+    overflow:hidden;
+  }
+
+  .press-heading{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    align-items:start;
+  }
+
+  .press-heading p{
+    max-width:470px;
+    color:var(--muted-light);
+    font-size:13px;
+    line-height:1.9;
+    font-weight:300;
+  }
+
+  .press-marquee{
+    overflow:hidden;
+    border-top:1px solid var(--line-light);
+    border-bottom:1px solid var(--line-light);
+    margin:75px 0 120px;
+    padding:28px 0;
+  }
+
+  .press-track{
+    width:max-content;
+    display:flex;
+    align-items:center;
+    gap:38px;
+    animation:pressMove 30s linear infinite;
+  }
+
+  .press-track span{
+    font-family:var(--serif);
+    font-size:31px;
+    letter-spacing:.04em;
+    color:#81796e;
+    white-space:nowrap;
+  }
+
+  .press-track i{
+    width:4px;
+    height:4px;
+    background:var(--gold);
+    border-radius:50%;
+    display:block;
+    flex:0 0 auto;
+  }
+
+  @keyframes pressMove{
+    from{
+      transform:translateX(0);
+    }
+
+    to{
+      transform:translateX(-50%);
+    }
+  }
+
+
+  .testimonial-area{
+    position:relative;
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .testimonial-counter{
+    position:absolute;
+    left:0;
+    top:0;
+    display:flex;
+    gap:8px;
+    font-size:9px;
+    letter-spacing:.15em;
+    color:#81796e;
+  }
+
+  .testimonial-counter span:first-child{
+    color:var(--gold);
+  }
+
+  .testimonial-quote{
+    max-width:980px;
+    text-align:center;
+  }
+
+  .quote-mark{
+    display:block;
+    color:var(--gold);
+    font-family:var(--serif);
+    font-size:75px;
+    line-height:.4;
+    margin-bottom:35px;
+  }
+
+  .testimonial-quote blockquote{
+    font-family:var(--serif);
+    font-size:clamp(36px,4.2vw,60px);
+    line-height:1.05;
+    letter-spacing:-.035em;
+    font-style:italic;
+    font-weight:400;
+    margin:0;
+  }
+
+  .testimonial-author{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+  }
+
+  .testimonial-author span{
+    font-size:9px;
+    letter-spacing:.18em;
+  }
+
+  .testimonial-author small{
+    color:#857d72;
+    font-size:8px;
+    letter-spacing:.15em;
+  }
+
+  .testimonial-controls{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:20px;
+  }
+
+  .testimonial-controls button{
+    border:0;
+    background:transparent;
+    color:var(--black);
+    cursor:pointer;
+    font-size:18px;
+    padding:8px;
+    transition:.3s ease;
+  }
+
+  .testimonial-controls button:hover{
+    color:var(--gold);
+  }
+
+  .testimonial-line{
+    width:120px;
+    height:1px;
+    background:var(--line-light);
+    position:relative;
+  }
+
+  .testimonial-line span{
+    position:absolute;
+    left:0;
+    top:0;
+    width:33%;
+    height:100%;
+    background:var(--gold);
+  }
+
+
+  /* =========================
+     INVESTMENT
+  ========================= */
+
+  .investment-section{
+    background:var(--cream);
+    color:var(--black);
+    padding:120px 0 150px;
+    border-top:1px solid var(--line-light);
+  }
+
+  .investment-header{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    margin-bottom:80px;
+  }
+
+  .investment-header h2{
+    font-family:var(--serif);
+    font-size:clamp(62px,7vw,105px);
+    line-height:.83;
+    letter-spacing:-.05em;
+    font-weight:600;
+    margin:0 0 30px;
+  }
+
+  .investment-header h2 em{
+    color:var(--gold);
+    font-weight:400;
+  }
+
+  .investment-header p{
+    max-width:500px;
+    color:var(--muted-light);
+    font-size:13px;
+    line-height:1.9;
+    font-weight:300;
+  }
+
+  .investment-note{
+    border-top:1px solid var(--line-light);
+    border-bottom:1px solid var(--line-light);
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    padding:22px 0;
+    margin-bottom:50px;
+  }
+
+  .investment-note span{
+    font-size:9px;
+    letter-spacing:.19em;
+  }
+
+  .investment-note p{
+    max-width:540px;
+    color:#777066;
+    font-size:12px;
+    line-height:1.7;
+    margin:0;
+  }
+
+
+  .investment-table{
+    border-top:1px solid #d9d1c5;
+  }
+
+  .investment-row{
+    display:grid;
+    grid-template-columns:1.3fr 1.3fr .6fr;
+    gap:40px;
+    align-items:center;
+    min-height:190px;
+    padding:28px 0;
+    border-bottom:1px solid #d9d1c5;
+    position:relative;
+  }
+
+  .investment-name{
+    position:relative;
+  }
+
+  .investment-name > span{
+    color:#81796e;
+    font-size:8px;
+    letter-spacing:.15em;
+  }
+
+  .investment-name h3{
+    font-family:var(--serif);
+    font-size:40px;
+    line-height:1;
+    font-weight:600;
+    letter-spacing:-.025em;
+    margin:10px 0 7px;
+  }
+
+  .investment-name p{
+    color:#827a70;
+    font-size:10px;
+    letter-spacing:.08em;
+    margin:0;
+  }
+
+  .investment-name b{
+    display:inline-block;
+    color:var(--gold);
+    font-size:7px;
+    letter-spacing:.16em;
+    font-weight:400;
+    margin-top:14px;
+  }
+
+  .investment-details{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+
+  .investment-details span{
+    color:#777066;
+    font-size:8px;
+    letter-spacing:.15em;
+  }
+
+  .investment-price{
+    text-align:right;
+  }
+
+  .investment-price small{
+    display:block;
+    color:#857d72;
+    font-size:7px;
+    letter-spacing:.16em;
+    margin-bottom:8px;
+  }
+
+  .investment-price strong{
+    font-family:var(--serif);
+    font-size:31px;
+    font-weight:500;
+  }
+
+
+  .investment-featured{
+    background:var(--black);
+    color:var(--cream);
+    padding-left:32px;
+    padding-right:32px;
+    margin:0 -32px;
+    border:1px solid var(--gold);
+  }
+
+  .investment-featured .investment-name h3{
+    color:var(--cream);
+  }
+
+  .investment-featured .investment-name p,
+  .investment-featured .investment-details span{
+    color:rgba(255,251,242,.5);
+  }
+
+  .investment-featured .investment-name > span{
+    color:rgba(255,251,242,.45);
+  }
+
+  .investment-featured .investment-price small{
+    color:rgba(255,251,242,.45);
+  }
+
+  .investment-featured .investment-price strong{
+    color:var(--gold);
+  }
+
+
+  .investment-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    padding-top:30px;
+  }
+
+  .investment-bottom p{
+    color:#777066;
+    font-size:11px;
+    line-height:1.7;
+    max-width:470px;
+    margin:0;
+  }
+
+  .investment-bottom p strong{
+    color:var(--black);
+    font-weight:500;
+  }
+
+  .investment-bottom a{
+    color:var(--black)id="4q7xk2"
+  .investment-bottom a{
+    color:var(--black);
+    text-decoration:none;
+    font-size:9px;
+    letter-spacing:.16em;
+    white-space:nowrap;
+    transition:.3s ease;
+  }
+
+  .investment-bottom a span{
+    color:var(--gold);
+    font-size:17px;
+    margin-left:10px;
+  }
+
+  .investment-bottom a:hover{
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     PART 3 RESPONSIVE
+  ========================= */
+
+  @media(max-width:900px){
+
+    .cinema-section,
+    .proof-section{
+      padding:100px 0;
+    }
+
+    .cinema-header,
+    .press-heading,
+    .investment-header{
+      grid-template-columns:1fr;
+      gap:30px;
+    }
+
+    .cinema-feature{
+      grid-template-columns:1fr;
+    }
+
+    .cinema-side{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:25px;
+    }
+
+    .film-archive{
+      grid-column:span 2;
+    }
+
+    .press-marquee{
+      margin:60px 0 90px;
+    }
+
+    .investment-section{
+      padding:100px 0;
+    }
+
+    .investment-note{
+      grid-template-columns:1fr;
+      gap:15px;
+    }
+
+    .investment-row{
+      grid-template-columns:1fr 1fr;
+      gap:25px;
+    }
+
+    .investment-price{
+      text-align:left;
+    }
+
+    .investment-featured{
+      margin:0 -20px;
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+  }
+
+
+  @media(max-width:600px){
+
+    .cinema-section,
+    .proof-section{
+      padding:80px 0;
+    }
+
+    .cinema-header h2{
+      font-size:68px;
+    }
+
+    .cinema-main-caption{
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .cinema-main-caption h3{
+      font-size:37px;
+    }
+
+    .cinema-location{
+      text-align:left;
+    }
+
+    .cinema-side{
+      display:flex;
+    }
+
+    .film-archive{
+      margin-top:5px;
+    }
+
+    .press-track span{
+      font-size:25px;
+    }
+
+    .press-marquee{
+      margin:50px 0 70px;
+    }
+
+    .testimonial-area{
+      min-height:460px;
+    }
+
+    .testimonial-quote blockquote{
+      font-size:35px;
+    }
+
+    .testimonial-author{
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .investment-section{
+      padding:80px 0;
+    }
+
+    .investment-header h2{
+      font-size:58px;
+    }
+
+    .investment-row{
+      grid-template-columns:1fr;
+      gap:22px;
+      min-height:auto;
+      padding:32px 0;
+    }
+
+    .investment-price{
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .investment-price small{
+      margin:0;
+    }
+
+    .investment-featured{
+      margin:0 -14px;
+      padding-left:14px;
+      padding-right:14px;
+    }
+
+    .investment-bottom{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:25px;
+    }
+
+  }
+
+</style>
+
+
+<!-- =========================================================
+     END OF PART 3
+========================================================= -->
+
+<!-- PART 4 STARTS BELOW -->
+<!-- =========================================================
+     SECTION 08 — CONTACT / AVAILABILITY
+========================================================= -->
+
+<section class="contact-section" id="contact">
+
+  <div class="contact-left">
+
+    <div class="contact-left-inner reveal">
+
+      <span class="eyebrow">
+        08 / BEGIN YOUR STORY
+      </span>
+
+      <h2>
+        Let's Make<br>
+        <em>History.</em>
+      </h2>
+
+      <p class="contact-intro">
+        For couples planning celebrations where every detail
+        deserves to be remembered.
+      </p>
+
+
+      <div class="contact-details">
+
+        <div class="contact-detail">
+
+          <span>STUDIO</span>
+
+          <p>
+            Bhopal, Madhya Pradesh<br>
+            India
+          </p>
+
+        </div>
+
+
+        <div class="contact-detail">
+
+          <span>WORLDWIDE</span>
+
+          <p>
+            Udaipur · Jaipur · Delhi<br>
+            Dubai · Worldwide
+          </p>
+
+        </div>
+
+
+        <div class="contact-detail">
+
+          <span>CONTACT</span>
+
+          <p>
+            +91 00000 00000<br>
+            hello@photostudio.in
+          </p>
+
+        </div>
+
+
+        <div class="contact-detail">
+
+          <span>SOCIAL</span>
+
+          <p>
+            @photostudio
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact-availability">
+
+        <span class="availability-dot"></span>
+
+        <p>
+          <strong>2026 — 2027</strong><br>
+          Limited dates remaining
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="contact-right">
+
+    <div class="contact-form-wrap reveal">
+
+      <div class="form-heading">
+
+        <span class="eyebrow dark-eyebrow">
+          AVAILABILITY ENQUIRY
+        </span>
+
+        <h3>
+          Tell us about<br>
+          your celebration.
+        </h3>
+
+        <p>
+          We respond personally within 24 hours.
+        </p>
+
+      </div>
+
+
+      <form id="availabilityForm" novalidate>
+
+
+        <!-- COUPLE NAMES -->
+
+        <div class="form-field">
+
+          <label for="coupleNames">
+            COUPLE NAMES
+          </label>
+
+          <input
+            type="text"
+            id="coupleNames"
+            name="coupleNames"
+            placeholder="Your names"
+            autocomplete="name"
+            required
+          >
+
+        </div>
+
+
+        <!-- WEDDING DATE -->
+
+        <div class="form-field">
+
+          <label for="weddingDate">
+            WEDDING DATE
+          </label>
+
+          <input
+            type="date"
+            id="weddingDate"
+            name="weddingDate"
+            required
+          >
+
+        </div>
+
+
+        <!-- VENUE -->
+
+        <div class="form-field">
+
+          <label for="venue">
+            VENUE / CITY
+          </label>
+
+          <input
+            type="text"
+            id="venue"
+            name="venue"
+            placeholder="Where will you celebrate?"
+            required
+          >
+
+        </div>
+
+
+        <!-- GUEST COUNT -->
+
+        <div class="form-field">
+
+          <label for="guestCount">
+            APPROX. GUEST COUNT
+          </label>
+
+          <input
+            type="number"
+            id="guestCount"
+            name="guestCount"
+            placeholder="e.g. 250"
+            min="1"
+          >
+
+        </div>
+
+
+        <!-- INSTAGRAM -->
+
+        <div class="form-field">
+
+          <label for="instagram">
+            INSTAGRAM HANDLES
+          </label>
+
+          <input
+            type="text"
+            id="instagram"
+            name="instagram"
+            placeholder="@yourhandle"
+          >
+
+        </div>
+
+
+        <!-- BUDGET -->
+
+        <div class="form-field">
+
+          <label for="budget">
+            EXPECTED INVESTMENT
+          </label>
+
+          <select
+            id="budget"
+            name="budget"
+            required
+          >
+
+            <option value="" selected disabled>
+              Select your range
+            </option>
+
+            <option value="5-8">
+              ₹5L — ₹8L
+            </option>
+
+            <option value="8-12">
+              ₹8L — ₹12L
+            </option>
+
+            <option value="12+">
+              ₹12L+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STORY -->
+
+        <div class="form-field form-field-large">
+
+          <label for="story">
+            TELL US YOUR STORY
+          </label>
+
+          <textarea
+            id="story"
+            name="story"
+            rows="5"
+            placeholder="Tell us a little about the celebration you are imagining..."
+          ></textarea>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button
+          type="submit"
+          class="form-submit"
+        >
+
+          <span>
+            REQUEST AVAILABILITY
+          </span>
+
+          <small>
+            24HR RESPONSE
+          </small>
+
+          <b>→</b>
+
+        </button>
+
+
+        <a
+          href="https://wa.me/910000000000"
+          class="form-whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          OR CONTINUE ON WHATSAPP
+          <span>↗</span>
+        </a>
+
+
+        <div
+          class="form-message"
+          id="formMessage"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+  <div class="container">
+
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <span>PHOTO STUDIO</span>
+
+        <small>
+          ATELIER OF HEIRLOOMS
+        </small>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="#work">Work</a>
+        <a href="#films">Films</a>
+        <a href="#atelier">Atelier</a>
+        <a href="#investment">Investment</a>
+        <a href="#contact">Contact</a>
+
+      </div>
+
+
+      <div class="footer-social">
+
+        <a href="#" aria-label="Instagram">
+          Instagram ↗
+        </a>
+
+        <a href="#" aria-label="Pinterest">
+          Pinterest ↗
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-wordmark">
+      PHOTO STUDIO
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 PHOTO STUDIO
+      </span>
+
+      <span>
+        BHOPAL · INDIA
+      </span>
+
+      <a href="#">
+        PRIVACY
+      </a>
+
+      <a href="#">
+        TERMS
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     PART 4 STYLES
+========================================================= -->
+
+<style>
+
+  /* =========================
+     CONTACT
+  ========================= */
+
+  .contact-section{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:900px;
+  }
+
+  .contact-left{
+    background:var(--black);
+    color:var(--cream);
+    padding:130px 7vw;
+    display:flex;
+    align-items:center;
+  }
+
+  .contact-left-inner{
+    width:100%;
+    max-width:650px;
+  }
+
+  .contact-left h2{
+    font-family:var(--serif);
+    font-size:clamp(75px,8vw,120px);
+    line-height:.78;
+    letter-spacing:-.055em;
+    font-weight:600;
+    margin:45px 0 35px;
+  }
+
+  .contact-left h2 em{
+    color:var(--gold);
+    font-weight:400;
+  }
+
+  .contact-intro{
+    color:rgba(255,251,242,.58);
+    max-width:420px;
+    font-size:14px;
+    line-height:1.9;
+    font-weight:300;
+    margin-bottom:70px;
+  }
+
+
+  .contact-details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px 50px;
+    padding-top:30px;
+    border-top:1px solid var(--line-dark);
+  }
+
+  .contact-detail span{
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:.2em;
+  }
+
+  .contact-detail p{
+    color:rgba(255,251,242,.62);
+    font-size:11px;
+    line-height:1.8;
+    margin:10px 0 0;
+  }
+
+
+  .contact-availability{
+    margin-top:70px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+  }
+
+  .availability-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 0 5px rgba(201,168,106,.08);
+  }
+
+  .contact-availability p{
+    color:rgba(255,251,242,.5);
+    font-size:8px;
+    line-height:1.7;
+    letter-spacing:.15em;
+    margin:0;
+  }
+
+  .contact-availability strong{
+    color:var(--cream);
+    font-weight:400;
+  }
+
+
+  /* =========================
+     FORM
+  ========================= */
+
+  .contact-right{
+    background:var(--cream);
+    color:var(--black);
+    padding:110px 7vw;
+    display:flex;
+    align-items:center;
+  }
+
+  .contact-form-wrap{
+    width:100%;
+    max-width:620px;
+    margin:0 auto;
+  }
+
+  .form-heading{
+    margin-bottom:50px;
+  }
+
+  .form-heading h3{
+    font-family:var(--serif);
+    font-size:clamp(48px,5vw,70px);
+    line-height:.85;
+    letter-spacing:-.045em;
+    font-weight:600;
+    margin:25px 0 20px;
+  }
+
+  .form-heading p{
+    color:var(--muted-light);
+    font-size:12px;
+    font-weight:300;
+  }
+
+
+  #availabilityForm{
+    width:100%;
+  }
+
+  .form-field{
+    position:relative;
+    border-bottom:1px solid #d8d0c4;
+    margin-bottom:30px;
+  }
+
+  .form-field label{
+    display:block;
+    color:#756d62;
+    font-size:8px;
+    letter-spacing:.18em;
+    margin-bottom:10px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--black);
+    font-family:var(--sans);
+    font-size:13px;
+    font-weight:300;
+    padding:0 0 13px;
+    border-radius:0;
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder{
+    color:#a19a90;
+  }
+
+  .form-field select{
+    cursor:pointer;
+    appearance:none;
+    background-image:
+      linear-gradient(45deg,transparent 50%,#81796e 50%),
+      linear-gradient(135deg,#81796e 50%,transparent 50%);
+    background-position:
+      calc(100% - 7px) 7px,
+      calc(100% - 2px) 7px;
+    background-size:5px 5px;
+    background-repeat:no-repeat;
+  }
+
+  .form-field textarea{
+    resize:vertical;
+    min-height:100px;
+    line-height:1.7;
+  }
+
+  .form-field:focus-within{
+    border-color:var(--gold);
+  }
+
+
+  .form-submit{
+    width:100%;
+    border:1px solid var(--black);
+    background:var(--black);
+    color:var(--cream);
+    min-height:70px;
+    padding:0 22px;
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    align-items:center;
+    gap:25px;
+    cursor:pointer;
+    font-family:var(--sans);
+    transition:.45s ease;
+    margin-top:15px;
+  }
+
+  .form-submit span{
+    text-align:left;
+    font-size:9px;
+    letter-spacing:.18em;
+  }
+
+  .form-submit small{
+    font-size:7px;
+    letter-spacing:.14em;
+    color:rgba(255,251,242,.45);
+  }
+
+  .form-submit b{
+    color:var(--gold);
+    font-size:20px;
+    font-weight:300;
+    transition:.4s ease;
+  }
+
+  .form-submit:hover{
+    background:transparent;
+    color:var(--black);
+  }
+
+  .form-submit:hover small{
+    color:#777066;
+  }
+
+  .form-submit:hover b{
+    transform:translateX(5px);
+  }
+
+
+  .form-whatsapp{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    color:#777066;
+    text-decoration:none;
+    font-size:8px;
+    letter-spacing:.16em;
+    margin-top:24px;
+    transition:.3s ease;
+  }
+
+  .form-whatsapp span{
+    color:var(--gold);
+    font-size:14px;
+  }
+
+  .form-whatsapp:hover{
+    color:var(--black);
+  }
+
+  .form-message{
+    min-height:20px;
+    text-align:center;
+    margin-top:18px;
+    font-size:10px;
+    letter-spacing:.05em;
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     FOOTER
+  ========================= */
+
+  .site-footer{
+    background:var(--black);
+    color:var(--cream);
+    padding:65px 0 25px;
+    overflow:hidden;
+  }
+
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:40px;
+    align-items:start;
+    padding-bottom:60px;
+    border-bottom:1px solid var(--line-dark);
+  }
+
+  .footer-brand{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .footer-brand span{
+    font-family:var(--serif);
+    font-size:28px;
+    letter-spacing:.03em;
+  }
+
+  .footer-brand small{
+    color:var(--gold);
+    font-size:7px;
+    letter-spacing:.22em;
+  }
+
+  .footer-links,
+  .footer-social{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .footer-links a,
+  .footer-social a{
+    color:rgba(255,251,242,.58);
+    text-decoration:none;
+    font-size:9px;
+    letter-spacing:.14em;
+    transition:.3s ease;
+  }
+
+  .footer-links a:hover,
+  .footer-social a:hover{
+    color:var(--gold);
+  }
+
+
+  .footer-wordmark{
+    font-family:var(--serif);
+    font-size:clamp(70px,15vw,220px);
+    line-height:.72;
+    letter-spacing:-.06em;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,251,242,.18);
+    white-space:nowrap;
+    margin:80px 0 60px;
+    transform:translateX(-8px);
+  }
+
+  .footer-bottom{
+    display:grid;
+    grid-template-columns:1fr 1fr auto auto;
+    gap:25px;
+    color:rgba(255,251,242,.35);
+    font-size:7px;
+    letter-spacing:.15em;
+  }
+
+  .footer-bottom a{
+    color:rgba(255,251,242,.35);
+    text-decoration:none;
+    transition:.3s ease;
+  }
+
+  .footer-bottom a:hover{
+    color:var(--gold);
+  }
+
+
+  /* =========================
+     CONTACT MOBILE
+  ========================= */
+
+  @media(max-width:900px){
+
+    .contact-section{
+      grid-template-columns:1fr;
+    }
+
+    .contact-left{
+      padding:100px 7vw;
+    }
+
+    .contact-right{
+      padding:90px 7vw;
+    }
+
+    .footer-top{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .footer-brand{
+      grid-column:span 2;
+    }
+
+    .footer-wordmark{
+      margin:65px 0 50px;
+    }
+
+    .footer-bottom{
+      grid-template-columns:1fr 1fr;
+    }
+
+  }
+
+
+  @media(max-width:600px){
+
+    .contact-left{
+      padding:80px 20px;
+    }
+
+    .contact-right{
+      padding:75px 20px;
+    }
+
+    .contact-left h2{
+      font-size:70px;
+    }
+
+    .contact-intro{
+      margin-bottom:55px;
+    }
+
+    .contact-details{
+      grid-template-columns:1fr;
+      gap:25px;
+    }
+
+    .contact-availability{
+      margin-top:55px;
+    }
+
+    .form-heading{
+      margin-bottom:40px;
+    }
+
+    .form-heading h3{
+      font-size:48px;
+    }
+
+    .form-submit{
+      grid-template-columns:1fr auto;
+      gap:12px;
+      min-height:65px;
+    }
+
+    .form-submit small{
+      display:none;
+    }
+
+    .footer-top{
+      grid-template-columns:1fr;
+      gap:35px;
+    }
+
+    .footer-brand{
+      grid-column:auto;
+    }
+
+    .footer-wordmark{
+      font-size:74px;
+      margin:65px 0 45px;
+    }
+
+    .footer-bottom{
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+      line-height:1.6;
+    }
+
+  }
+
+</style>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+  /* =========================================================
+     LENIS — CINEMATIC SMOOTH SCROLL
+  ========================================================= */
+
+  let lenis;
+
+  if(typeof Lenis !== "undefined"){
+
+    lenis = new Lenis({
+      duration:1.15,
+      smoothWheel:true,
+      syncTouch:false
+    });
+
+    function raf(time){
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+  }
+
+
+  /* =========================================================
+     NAVBAR — SCROLL STATE
+  ========================================================= */
+
+  const navbar = document.getElementById("navbar");
+
+  function updateNavbar(){
+
+    if(!navbar) return;
+
+    if(window.scrollY > 70){
+      navbar.classList.add("scrolled");
+    }else{
+      navbar.classList.remove("scrolled");
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    updateNavbar,
+    {passive:true}
+  );
+
+  updateNavbar();
+
+
+  /* =========================================================
+     MOBILE MENU
+  ========================================================= */
+
+  const menuToggle =
+    document.getElementById("menuToggle");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+  const mobileLinks =
+    document.querySelectorAll(".mobile-menu a");
+
+  if(menuToggle && mobileMenu){
+
+    menuToggle.addEventListener(
+      "click",
+      () => {
+
+        menuToggle.classList.toggle("active");
+
+        mobileMenu.classList.toggle("open");
+
+        document.body.classList.toggle(
+          "menu-open"
+        );
+
+      }
+    );
+
+  }
+
+
+  mobileLinks.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        menuToggle?.classList.remove("active");
+
+        mobileMenu?.classList.remove("open");
+
+        document.body.classList.remove(
+          "menu-open"
+        );
+
+      }
+    );
+
+  });
+
+
+  /* =========================================================
+     ANCHOR SCROLL
+  ========================================================= */
+
+  document.querySelectorAll(
+    'a[href^="#"]'
+  ).forEach(link => {
+
+    link.addEventListener(
+      "click",
+      function(event){
+
+        const targetId =
+          this.getAttribute("href");
+
+        if(
+          !targetId ||
+          targetId === "#"
+        ) return;
+
+        const target =
+          document.querySelector(targetId);
+
+        if(!target) return;
+
+        event.preventDefault();
+
+        if(lenis){
+
+          lenis.scrollTo(
+            target,
+            {
+              offset:-20,
+              duration:1.2
+            }
+          );
+
+        }else{
+
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+        }
+
+      }
+    );
+
+  });
+
+
+  /* =========================================================
+     REVEAL ANIMATIONS
+  ========================================================= */
+
+  const revealItems =
+    document.querySelectorAll(".reveal");
+
+  if("IntersectionObserver" in window){
+
+    const revealObserver =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              revealObserver.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold:.12,
+          rootMargin:"0px 0px -40px 0px"
+        }
+      );
+
+    revealItems.forEach(item => {
+
+      revealObserver.observe(item);
+
+    });
+
+  }else{
+
+    revealItems.forEach(item => {
+
+      item.classList.add("visible");
+
+    });
+
+  }
+
+
+  /* =========================================================
+     PORTFOLIO FILTERS
+  ========================================================= */
+
+  const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
+  const portfolioItems =
+    document.querySelectorAll(".portfolio-item");
+
+  filterButtons.forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        filterButtons.forEach(btn => {
+
+          btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
+
+        const filter =
+          button.dataset.filter;
+
+        portfolioItems.forEach(item => {
+
+          const category =
+            item.dataset.category;
+
+          if(
+            filter === "all" ||
+            category === filter
+          ){
+
+            item.style.display = "";
+
+            requestAnimationFrame(() => {
+
+              item.style.opacity = "1";
+              item.style.transform =
+                "scale(1)";
+
+            });
+
+          }else{
+
+            item.style.opacity = "0";
+            item.style.transform =
+              "scale(.97)";
+
+            setTimeout(() => {
+
+              item.style.display = "none";
+
+            },250);
+
+          }
+
+        });
+
+      }
+    );
+
+  });
+
+
+  /* =========================================================
+     LIGHTBOX
+  ========================================================= */
+
+  const lightbox =
+    document.getElementById("lightbox");
+
+  const lightboxImage =
+    document.getElementById("lightboxImage");
+
+  const lightboxTitle =
+    document.getElementById("lightboxTitle");
+
+  const lightboxLocation =
+    document.getElementById("lightboxLocation");
+
+const lightboxClose =
+    document.getElementById("lightboxClose");
+
+const lightboxPrev =
+    document.getElementById("lightboxPrev");
+
+const lightboxNext =
+    document.getElementById("lightboxNext");
+
+
+let currentPortfolioIndex = 0;
+
+function visiblePortfolioItems(){
+
+  return Array.from(
+    document.querySelectorAll(".portfolio-item")
+  ).filter(item => {
+
+    return item.style.display !== "none";
+
+  });
+
+}
+
+
+function openLightbox(item){
+
+  if(!item || !lightbox) return;
+
+  const items =
+    visiblePortfolioItems();
+
+  currentPortfolioIndex =
+    items.indexOf(item);
+
+  if(currentPortfolioIndex < 0){
+    currentPortfolioIndex = 0;
+  }
+
+  updateLightbox();
+
+  lightbox.classList.add("open");
+
+  lightbox.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "lightbox-open"
+  );
+
+}
+
+
+function updateLightbox(){
+
+  const items =
+    visiblePortfolioItems();
+
+  if(!items.length) return;
+
+  const item =
+    items[
+      (currentPortfolioIndex +
+        items.length) %
+      items.length
+    ];
+
+  const image =
+    item.dataset.image;
+
+  const title =
+    item.dataset.title || "";
+
+  const location =
+    item.dataset.location || "";
+
+
+  lightboxImage.src = image;
+
+  lightboxImage.alt = title;
+
+  lightboxTitle.textContent =
+    title;
+
+  lightboxLocation.textContent =
+    location;
+
+}
+
+
+function closeLightbox(){
+
+  if(!lightbox) return;
+
+  lightbox.classList.remove(
+    "open"
+  );
+
+  lightbox.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "lightbox-open"
+  );
+
+  setTimeout(() => {
+
+    if(!lightbox.classList.contains("open")){
+
+      lightboxImage.src = "";
+
+    }
+
+  },450);
+
+}
+
+
+portfolioItems.forEach(item => {
+
+  item.addEventListener(
+    "click",
+    () => {
+
+      openLightbox(item);
+
+    }
+  );
+
+});
+
+
+lightboxClose?.addEventListener(
+  "click",
+  closeLightbox
+);
+
+
+lightboxPrev?.addEventListener(
+  "click",
+  () => {
+
+    const items =
+      visiblePortfolioItems();
+
+    if(!items.length) return;
+
+    currentPortfolioIndex--;
+
+    if(
+      currentPortfolioIndex < 0
+    ){
+
+      currentPortfolioIndex =
+        items.length - 1;
+
+    }
+
+    updateLightbox();
+
+  }
+);
+
+
+lightboxNext?.addEventListener(
+  "click",
+  () => {
+
+    const items =
+      visiblePortfolioItems();
+
+    if(!items.length) return;
+
+    currentPortfolioIndex++;
+
+    if(
+      currentPortfolioIndex >=
+      items.length
+    ){
+
+      currentPortfolioIndex = 0;
+
+    }
+
+    updateLightbox();
+
+  }
+);
+
+
+lightbox?.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target === lightbox
+    ){
+
+      closeLightbox();
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      !lightbox?.classList.contains("open")
+    ) return;
+
+    if(event.key === "Escape"){
+
+      closeLightbox();
+
+    }
+
+    if(event.key === "ArrowLeft"){
+
+      lightboxPrev?.click();
+
+    }
+
+    if(event.key === "ArrowRight"){
+
+      lightboxNext?.click();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   TESTIMONIAL SLIDER
+========================================================= */
+
+const testimonialQuote =
+  document.querySelector(
+    ".testimonial-quote blockquote"
+  );
+
+const testimonialAuthor =
+  document.querySelector(
+    ".testimonial-author span"
+  );
+
+const testimonialLocation =
+  document.querySelector(
+    ".testimonial-author small"
+  );
+
+const testimonialCounter =
+  document.querySelector(
+    ".testimonial-counter span:first-child"
+  );
+
+const testimonialProgress =
+  document.querySelector(
+    ".testimonial-line span"
+  );
+
+const testimonialPrev =
+  document.querySelector(
+    ".testimonial-prev"
+  );
+
+const testimonialNext =
+  document.querySelector(
+    ".testimonial-next"
+  );
+
+
+const testimonials = [
+
+  {
+    quote:
+      "They didn't simply photograph our wedding. They understood the feeling of it. Every frame feels like a memory we were somehow lucky enough to keep forever.",
+
+    author:
+      "AARAV & MEERA",
+
+    location:
+      "UDAIPUR · 2025"
+  },
+
+  {
+    quote:
+      "Every image feels intentional. Nothing looked staged, yet every frame felt like it belonged in a magazine.",
+
+    author:
+      "VEER & ANANYA",
+
+    location:
+      "JAIPUR · 2025"
+  },
+
+  {
+    quote:
+      "From the first conversation to the final film, the entire experience felt incredibly personal and beautifully considered.",
+
+    author:
+      "ARJUN & ISHA",
+
+    location:
+      "DUBAI · 2026"
+  }
+
+];
+
+
+let testimonialIndex = 0;
+
+
+function updateTestimonial(){
+
+  const item =
+    testimonials[testimonialIndex];
+
+  if(testimonialQuote){
+
+    testimonialQuote.style.opacity = "0";
+
+  }
+
+  setTimeout(() => {
+
+    if(testimonialQuote){
+
+      testimonialQuote.textContent =
+        item.quote;
+
+      testimonialQuote.style.opacity =
+        "1";
+
+    }
+
+    if(testimonialAuthor){
+
+      testimonialAuthor.textContent =
+        item.author;
+
+    }
+
+    if(testimonialLocation){
+
+      testimonialLocation.textContent =
+        item.location;
+
+    }
+
+    if(testimonialCounter){
+
+      testimonialCounter.textContent =
+        String(
+          testimonialIndex + 1
+        ).padStart(2,"0");
+
+    }
+
+    if(testimonialProgress){
+
+      testimonialProgress.style.width =
+        (
+          (
+            testimonialIndex + 1
+          ) /
+          testimonials.length *
+          100
+        ) + "%";
+
+    }
+
+  },180);
+
+}
+
+
+testimonialPrev?.addEventListener(
+  "click",
+  () => {
+
+    testimonialIndex--;
+
+    if(testimonialIndex < 0){
+
+      testimonialIndex =
+        testimonials.length - 1;
+
+    }
+
+    updateTestimonial();
+
+  }
+);
+
+
+testimonialNext?.addEventListener(
+  "click",
+  () => {
+
+    testimonialIndex++;
+
+    if(
+      testimonialIndex >=
+      testimonials.length
+    ){
+
+      testimonialIndex = 0;
+
+    }
+
+    updateTestimonial();
+
+  }
+);
+
+
+/* =========================================================
+   FORM VALIDATION
+========================================================= */
+
+const availabilityForm =
+  document.getElementById(
+    "availabilityForm"
+  );
+
+const formMessage =
+  document.getElementById(
+    "formMessage"
+  );
+
+
+availabilityForm?.addEventListener(
+  "submit",
+  event => {
+
+    event.preventDefault();
+
+    const couple =
+      document.getElementById(
+        "coupleNames"
+      );
+
+    const date =
+      document.getElementById(
+        "weddingDate"
+      );
+
+    const venue =
+      document.getElementById(
+        "venue"
+      );
+
+    const budget =
+      document.getElementById(
+        "budget"
+      );
+
+
+    if(
+      !couple.value.trim() ||
+      !date.value ||
+      !venue.value.trim() ||
+      !budget.value
+    ){
+
+      formMessage.textContent =
+        "Please complete the required details.";
+
+      return;
+
+    }
+
+
+    formMessage.textContent =
+      "Thank you. Your enquiry has been received.";
+
+    availabilityForm.reset();
+
+  }
+);
+
+
+/* =========================================================
+   DATE — MINIMUM TODAY
+========================================================= */
+
+const weddingDate =
+  document.getElementById(
+    "weddingDate"
+  );
+
+if(weddingDate){
+
+  const today =
+    new Date();
+
+  const year =
+    today.getFullYear();
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+  weddingDate.min =
+    `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================================
+   CINEMA PLAY BUTTON
+========================================================= */
+
+const cinemaPlay =
+  document.querySelector(
+    ".cinema-play"
+  );
+
+cinemaPlay?.addEventListener(
+  "click",
+  () => {
+
+    cinemaPlay.classList.toggle(
+      "playing"
+    );
+
+    const label =
+      cinemaPlay.querySelector(
+        "span"
+      );
+
+    if(
+      label.textContent === "PLAY"
+    ){
+
+      label.textContent =
+        "SOON";
+
+    }else{
+
+      label.textContent =
+        "PLAY";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   IMAGE ERROR FALLBACK
+========================================================= */
+
+document
+  .querySelectorAll("img")
+  .forEach(img => {
+
+    img.addEventListener(
+      "error",
+      () => {
+
+        img.style.opacity = "0";
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   ESCAPE — MOBILE MENU
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape" &&
+      mobileMenu?.classList.contains("open")
+    ){
+
+      menuToggle?.classList.remove(
+        "active"
+      );
+
+      mobileMenu.classList.remove(
+        "open"
+      );
+
+      document.body.classList.remove(
+        "menu-open"
+      );
+
+    }
+
+  }
+);
+
+
+</script>
+
+
+<!-- =========================================================
+     FINAL BODY / HTML
+========================================================= -->
+
+</body>
+</html>
